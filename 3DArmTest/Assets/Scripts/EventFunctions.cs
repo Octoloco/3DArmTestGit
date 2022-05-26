@@ -25,4 +25,9 @@ public class EventFunctions : MonoBehaviour
     {
         armBehaviour.TriggerMoveStageThree();
     }
+
+    public void GrabAndRelease()
+    {
+        armBehaviour.GrabAndRelease();
+    }
 }

@@ -31,6 +31,12 @@ public class ArmBehaviour : MonoBehaviour
     private Animator finger2Animator;
     [SerializeField]
     private Animator finger3Animator;
+    [SerializeField]
+    private Transform palmAnchor;
+    [SerializeField]
+    private Toyspawner toyspawner;
+
+    private Transform grabbedObject;
 
     private void Update()
     {
@@ -85,5 +91,33 @@ public class ArmBehaviour : MonoBehaviour
             palmAnimator.SetBool("armActive", false);
             fingersAnimator.SetBool("armActive", false);
         }
+    }
+
+    public void GrabAndRelease()
+    {
+        if (grabbedObject != null)
+        {
+            grabbedObject.SetParent(null);
+            grabbedObject.GetComponent<Rigidbody>().useGravity = true;
+            grabbedObject = null;
+        }
+        else
+        {
+            Collider[] grabbedObjects = Physics.OverlapSphere(palmAnchor.transform.position, .5f);
+            foreach (Collider c in grabbedObjects)
+            {
+                if (c.CompareTag("Toy"))
+                {
+                    grabbedObject = c.transform;
+                    grabbedObject.GetComponent<Rigidbody>().useGravity = false;
+                    grabbedObject.SetParent(palmAnchor);
+                }
+            }
+        }
+    }
+
+    public void SpawnNewToy()
+    {
+        toyspawner.PositionRandomToy();
     }
 }
