@@ -12,7 +12,7 @@ public class ToyMovement : MonoBehaviour
 
     void Start()
     {
-        mayMove = false;
+        mayMove = true;
     }
 
     void Update()

@@ -16,6 +16,7 @@ public class Toyspawner : MonoBehaviour
     private void Start()
     {
         SpawnNewToys();
+        PositionRandomToy();
     }
 
     private void SpawnNewToys()
@@ -27,6 +28,7 @@ public class Toyspawner : MonoBehaviour
                 GameObject newToy = Instantiate(toyPref, spawnAnchor.position, Quaternion.identity);
                 newToy.GetComponent<ToyMovement>().toyspawner = this;
                 toyList.Add(newToy);
+                newToy.SetActive(false);
             }
         }
     }
@@ -45,5 +47,6 @@ public class Toyspawner : MonoBehaviour
         toy.gameObject.SetActive(false);
         toy.transform.position = spawnAnchor.position;
         toyList.Add(toy.gameObject);
+        PositionRandomToy();
     }
 }

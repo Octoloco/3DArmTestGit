@@ -30,4 +30,9 @@ public class EventFunctions : MonoBehaviour
     {
         armBehaviour.GrabAndRelease();
     }
+
+    public void SpawnToy()
+    {
+        armBehaviour.SpawnNewToy();
+    }
 }

@@ -1612,5 +1612,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf89e3d45b7e5246ae1b49971a44c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 5
   toyspawner: {fileID: 0}
