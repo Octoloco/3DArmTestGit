@@ -36,6 +36,7 @@ public class ArmBehaviour : MonoBehaviour
     [SerializeField]
     private Toyspawner toyspawner;
 
+    [SerializeField]
     private Transform grabbedObject;
 
     private void Update()
@@ -95,21 +96,24 @@ public class ArmBehaviour : MonoBehaviour
 
     public void GrabAndRelease()
     {
+        
         if (grabbedObject != null)
         {
             grabbedObject.SetParent(null);
-            grabbedObject.GetComponent<Rigidbody>().useGravity = true;
+            grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
             grabbedObject = null;
         }
         else
         {
-            Collider[] grabbedObjects = Physics.OverlapSphere(palmAnchor.transform.position, .5f);
+           
+            Collider[] grabbedObjects = Physics.OverlapSphere(palmAnchor.transform.position, 1f);
             foreach (Collider c in grabbedObjects)
             {
                 if (c.CompareTag("Toy"))
                 {
+                    
                     grabbedObject = c.transform;
-                    grabbedObject.GetComponent<Rigidbody>().useGravity = false;
+                    grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
                     grabbedObject.SetParent(palmAnchor);
                 }
             }
