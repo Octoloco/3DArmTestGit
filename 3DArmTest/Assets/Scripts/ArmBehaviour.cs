@@ -5,9 +5,18 @@ using UnityEngine;
 public class ArmBehaviour : MonoBehaviour
 {
     [SerializeField]
-    private bool testButton = false;
-
+    private Material onMaterial;
     [SerializeField]
+    private Material offMaterial;
+    [SerializeField]
+    private Renderer buttonRenderer;
+    [SerializeField]
+    private Renderer screenRenderer;
+    [SerializeField]
+    private AudioSource buttonSound;
+    [SerializeField]
+    private AudioSource armSound;
+
     private bool armActive = false;
     [SerializeField]
     private Animator firstJointAnimator;
@@ -39,15 +48,6 @@ public class ArmBehaviour : MonoBehaviour
     [SerializeField]
     private Transform grabbedObject;
 
-    private void Update()
-    {
-        if (testButton)
-        {
-            testButton = false;
-            ArmActiveSwitch();
-        }
-    }
-
     public void TriggerMoveStageOne()
     {
         firstJointAnimator.SetTrigger("move");
@@ -75,6 +75,9 @@ public class ArmBehaviour : MonoBehaviour
     {
         if (!armActive)
         {
+            buttonSound.Play();
+            buttonRenderer.material = offMaterial;
+            screenRenderer.material = onMaterial;
             armActive = true;
             firstJointAnimator.SetBool("armActive", true);
             secondJointAnimator.SetBool("armActive", true);
@@ -84,8 +87,10 @@ public class ArmBehaviour : MonoBehaviour
         }
         else
         {
+            buttonSound.Play();
+            buttonRenderer.material = onMaterial;
+            screenRenderer.material = offMaterial;
             armActive = false;
-
             firstJointAnimator.SetBool("armActive", false);
             secondJointAnimator.SetBool("armActive", false);
             thirdJointAnimator.SetBool("armActive", false);
@@ -123,5 +128,10 @@ public class ArmBehaviour : MonoBehaviour
     public void SpawnNewToy()
     {
         toyspawner.PositionRandomToy();
+    }
+
+    public void PlayArmSound()
+    {
+        armSound.Play();
     }
 }

@@ -8,6 +8,7 @@ TagManager:
   - Stop
   - Kill
   - Go
+  - controlPanel
   layers:
   - Default
   - TransparentFX

@@ -35,4 +35,9 @@ public class EventFunctions : MonoBehaviour
     {
         armBehaviour.SpawnNewToy();
     }
+
+    public void PlaySound()
+    {
+        armBehaviour.PlayArmSound();
+    }
 }
