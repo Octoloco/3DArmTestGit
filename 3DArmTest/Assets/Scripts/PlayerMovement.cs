@@ -37,6 +37,10 @@ public class PlayerMovement : MonoBehaviour
                 {
                     armBehaviour.ArmActiveSwitch();
                 }
+                else if (hit.transform.CompareTag("Exit"))
+                {
+                    Application.Quit();
+                }
             }
         }
     }
